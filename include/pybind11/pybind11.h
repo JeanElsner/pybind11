@@ -52,7 +52,7 @@ PYBIND11_WARNING_DISABLE_MSVC(4127)
 
 PYBIND11_NAMESPACE_BEGIN(detail)
 
-std::string replaceNewlinesAndSquash(const char* text) {
+inline std::string replaceNewlinesAndSquash(const char* text) {
     std::string result;
 
     // Replace newlines with spaces and squash consecutive spaces
@@ -451,7 +451,7 @@ protected:
                 // Write default value if available.
                 if (!is_starred && arg_index < rec->args.size() && rec->args[arg_index].descr) {
                     signature += " = ";
-                    signature += replaceNewlinesAndSquash(rec->args[arg_index].descr);
+                    signature += detail::replaceNewlinesAndSquash(rec->args[arg_index].descr);
                 }
                 // Separator for positional-only arguments (placed after the
                 // argument, rather than before like *
